@@ -28,7 +28,7 @@ SECRET_KEY = env.str("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DEBUG")
 
-ALLOWED_HOSTS = env.str("ALLOWED_HOSTS").split(", ")
+ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 
 # Application definition
@@ -42,10 +42,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     #3-rd party
+    'rest_framework',
+    'rest_framework_simplejwt',
+    "django_filters",
+
 
     #local
     "rent.apps.RentConfig",
-    "user.apps.UserConfig"
+    "user.apps.UserConfig",
+    "reviews.apps.ReviewsConfig",
+    "listings.apps.ListingsConfig",
 
 ]
 
@@ -59,6 +65,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "user.jwt_helper.JWTAuthenticationMiddleware",
 ]
 
 ROOT_URLCONF = 'TestDiploma.urls'
@@ -136,10 +143,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'user.CustomUser'
 
-INSTALLED_APPS += [
-    'rest_framework',
-    'rest_framework_simplejwt',
-]
+
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (

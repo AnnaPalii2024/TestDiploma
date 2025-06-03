@@ -24,6 +24,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('api/', include('reviews.urls')),
+    path('api/', include('user.urls')),
     path('api/', include('listings.urls')),
 ]
 
@@ -33,7 +34,7 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
 
-urlpatterns = [
+urlpatterns += [
     path('api/auth/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]

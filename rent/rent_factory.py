@@ -12,6 +12,7 @@ fake = Faker("ru_RU")
 class RentHouseFactory(DjangoModelFactory):
     class Meta:
         model = Rent
+
     title = factory.LazyAttribute(lambda _: fake.sentence(nb_words=5))
     discription = factory.LazyAttribute(lambda _: fake.paragraph(nb_sentences=3))
     address = factory.LazyAttribute(lambda _: fake.address())
@@ -26,6 +27,6 @@ class RentHouseFactory(DjangoModelFactory):
         min=1,
         max=5
     ))
-    room_type = factory.LazyAttribute(lambda _: random.element(
+    room_type = factory.LazyAttribute(lambda _: fake.random_element(
         RoomType.faker_choices()
     ))

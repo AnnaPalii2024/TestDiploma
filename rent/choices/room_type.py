@@ -19,4 +19,4 @@ class RoomType(str, Enum):
 
     @classmethod
     def faker_choices(cls):
-        return [member.value for member in cls]
+        return [member.name for member in cls]
